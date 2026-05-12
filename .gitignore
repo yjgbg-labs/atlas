@@ -1,0 +1,22 @@
+# Scala CLI
+.scala-build/
+.scala/
+.metals/
+.bsp/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Build
+target/
+*.class
+
+# Data
+*.jsonl
+*.tmp.jsonl
+
+# OS
+.DS_Store
+Thumbs.db

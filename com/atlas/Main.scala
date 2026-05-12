@@ -23,6 +23,7 @@ object Main extends IOApp:
         .use: atlas =>
           for
             _     <- atlas.load
+            _     <- atlas.compact
             _     <- log(s"atlas ready, data=$dataFile")
             server = AtlasServer(atlas).server
             conn   = StdioJsonRpcConnection.create[IO]

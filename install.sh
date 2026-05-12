@@ -10,15 +10,16 @@ if ! command -v scala &>/dev/null && ! command -v scala-cli &>/dev/null; then
 fi
 SCALA=$(command -v scala 2>/dev/null || command -v scala-cli)
 
-# clone or update
 if [ -d "$REPO_HOME/.git" ]; then
+  echo "atlas: updating..."
   git -C "$REPO_HOME" pull --ff-only --quiet
 else
+  echo "atlas: installing..."
   rm -rf "$REPO_HOME"
   git clone --quiet "$REPO_URL" "$REPO_HOME"
 fi
 
-# compile & run
+echo "atlas: compiling..."
 cd "$REPO_HOME"
 "$SCALA" compile . --suppress-directives-in-multiple-files-warning 2>/dev/null
-exec "$SCALA" run . --suppress-directives-in-multiple-files-warning "$@"
+echo "atlas: ready at $REPO_HOME"

@@ -5,18 +5,18 @@ A triple-store MCP server. Stores facts as `(subject, predicate, object)` triple
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yjgbg-labs/atlas/master/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/yjgbg-labs/atlas/master/install.sh | bash
 ```
 
-Clones to `~/.local/share/atlas`, compiles, and starts the MCP server. Data is stored at `~/.atlas/db.jsonl`.
+Clones to `~/.local/share/atlas` and compiles. Data is stored at `~/.atlas/db.jsonl`.
 
 ### MCP Config
 
 ```json
 {
   "atlas": {
-    "command": "bash",
-    "args": ["/home/emma/.local/share/atlas/bootstrap.sh"]
+    "command": "scala",
+    "args": ["run", "/home/emma/.local/share/atlas"]
   }
 }
 ```

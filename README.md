@@ -2,13 +2,13 @@
 
 A triple-store MCP server. Stores facts as `(subject, predicate, object)` triples in a local JSONL file.
 
-## Quick Start
+## Install
 
 ```bash
-./start.sh
+curl -fsSL https://raw.githubusercontent.com/yjgbg-labs/atlas/master/install.sh | bash
 ```
 
-Data is persisted to `~/.atlas/db.jsonl`.
+Clones to `~/.atlas` and starts the MCP server. Requires `scala` or `scala-cli`.
 
 ## MCP Tools
 

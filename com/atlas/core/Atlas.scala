@@ -33,7 +33,7 @@ final class Atlas(dbPath: Path):
             case LogLine("+", row) => cache.put(row.id, row)
             case LogLine("-", row) =>
               val e = row.entry
-              cache.asMap().asScala.find((_, r) =>
+              cache.asMap().asScala.filter((_, r) =>
                 r.entry.subject == e.subject && r.entry.predicate == e.predicate && r.entry.`object` == e.`object`
               ).foreach: (id, _) =>
                 cache.invalidate(id)
@@ -58,14 +58,14 @@ final class Atlas(dbPath: Path):
 
   def delete(subject: String, predicate: String, `object`: String): IO[Boolean] =
     IO.interruptible:
-      cache.asMap().asScala.find: (_, row) =>
+      val matches = cache.asMap().asScala.filter: (_, row) =>
         row.entry.subject == subject && row.entry.predicate == predicate && row.entry.`object` == `object`
-      match
-        case Some((id, row)) =>
+      if matches.isEmpty then false
+      else
+        matches.foreach: (id, row) =>
           cache.invalidate(id)
           append(LogLine("-", row))
-          true
-        case None => false
+        true
 
   // ---- query ----
 
